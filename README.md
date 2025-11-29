@@ -1,69 +1,86 @@
-# Simple POS System
+# 🛒 POS System
 
-This is a simple Point of Sale system built with the MERN stack (MongoDB, Express, React, Node.js) and TypeScript.
+A modern Point of Sale system with Admin Dashboard and Customer Storefront.
 
-## Features
+## 🚀 One-Click Deploy
 
-- Login/Logout
-- Manage Categories
-- Manage Products
-- Manage Sales
-- Manage Suppliers
-- Stock Monitoring (Inventory)
-- Manage System Users
-- Generate Sales Report
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/mohamedsadiiq45-maker/pos-system)
 
-## Prerequisites
+**Click the button above to deploy the backend server instantly!**
 
-- Node.js (v18 or higher)
+---
+
+## ✨ Features
+
+- ✅ Login/Logout with JWT Authentication
+- ✅ Manage Categories & Products
+- ✅ Process Sales & Returns
+- ✅ Manage Suppliers
+- ✅ Stock/Inventory Monitoring
+- ✅ User Management (Admin, Manager, Cashier)
+- ✅ Sales Reports & Analytics
+- ✅ Customer Storefront
+- ✅ Media Library
+
+---
+
+## 🔑 Default Login
+
+- **Email:** `admin@pos.com`
+- **Password:** `admin123`
+
+---
+
+## 🛠️ Local Development
+
+### Prerequisites
+- Node.js v18+
 - npm
 
-## Getting Started
+### Setup
 
-1.  **Install dependencies:**
+```bash
+# Install all dependencies
+npm install
 
-    Run the following command in the root directory of the project to install all the necessary dependencies for both the client and the server.
+# Setup database
+cd packages/server
+npx prisma db push
+npx prisma db seed
 
-    ```bash
-    npm install
-    ```
+# Run development servers
+cd ../..
+npm run dev
+```
 
-2.  **Set up the database:**
+- **Admin Dashboard:** http://localhost:5173
+- **Storefront:** http://localhost:5174
+- **API Server:** http://localhost:3001
 
-    The application uses a SQLite database. To set up the database and apply the schema, run the following commands in the `packages/server` directory.
+---
 
-    ```bash
-    cd packages/server
-    npx prisma db push
-    ```
+## 📁 Project Structure
 
-3.  **Seed the database:**
+```
+├── packages/
+│   ├── client/      # Admin Dashboard (React)
+│   ├── server/      # Backend API (Node.js/Express)
+│   └── storefront/  # Customer Store (React)
+```
 
-    To populate the database with some initial data, run the following command in the `packages/server` directory.
+---
 
-    ```bash
-    npx prisma db seed
-    ```
+## 🌐 Deployment
 
-    This will create a default user with the following credentials:
-    - **Email:** `admin@example.com`
-    - **Password:** `password123`
+See [DEPLOYMENT.md](./DEPLOYMENT.md) for full deployment guide.
 
-4.  **Run the application:**
+### Quick Deploy:
+1. Click the "Deploy to Render" button above
+2. Upload `packages/client/dist` to your shared hosting
+3. Done!
 
-    To run both the client and the server concurrently, run the following command in the root directory of the project.
+---
 
-    ```bash
-    npm run dev
-    ```
+## 📄 License
 
-    The client will be available at `http://localhost:5173` and the server at `http://localhost:3001`.
-
-## Project Structure
-
-The project is a monorepo with two packages:
-
--   `packages/client`: The React frontend application.
--   `packages/server`: The Node.js/Express backend application.
-
-Each package has its own `package.json` file with its own dependencies and scripts. The root `package.json` file contains scripts to run both the client and the server concurrently.
+MIT
