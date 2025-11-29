@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 220" width="200" height="220">
+  <!-- Orange S Letter -->
+  <path d="M100 10 C60 10 40 35 40 55 C40 80 60 90 85 95 C110 100 130 105 130 125 C130 145 110 160 80 160 C50 160 35 145 35 125" 
+        fill="none" stroke="#F5A623" stroke-width="22" stroke-linecap="round"/>
+  
+  <!-- Blue Chevrons -->
+  <path d="M30 130 L50 150 L30 170" fill="none" stroke="#4A7CFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M50 130 L70 150 L50 170" fill="none" stroke="#4A7CFF" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+  
+  <!-- SUPER Text -->
+  <text x="100" y="195" font-family="Arial, sans-serif" font-size="24" font-weight="bold" fill="#4A7CFF" text-anchor="middle" letter-spacing="4">SUPER</text>
+  
+  <!-- ELECTRONICS Text -->
+  <text x="100" y="212" font-family="Arial, sans-serif" font-size="12" fill="#888888" text-anchor="middle" letter-spacing="2">ELECTRONICS</text>
+</svg>
+

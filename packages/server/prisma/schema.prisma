@@ -1,0 +1,181 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  email     String   @unique
+  name      String?
+  password  String
+  role      String   @default("cashier")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Category {
+  id        Int        @id @default(autoincrement())
+  name      String     @unique
+  imageUrl  String?
+  parentId  Int?
+  parent    Category?  @relation("CategoryToSubcategory", fields: [parentId], references: [id])
+  children  Category[] @relation("CategoryToSubcategory")
+  products  Product[]
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+}
+
+model Product {
+  id          Int      @id @default(autoincrement())
+  name        String
+  description String?
+  price       Float
+  cost        Float
+  quantity    Int
+  imageUrl    String?
+  categoryId  Int
+  category    Category @relation(fields: [categoryId], references: [id])
+  supplierId  Int
+  supplier    Supplier @relation(fields: [supplierId], references: [id])
+  isFeatured  Boolean  @default(false)
+  isNewArrival Boolean @default(false)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  saleItems   SaleItem[]
+  deals       Deal[]
+}
+
+model Supplier {
+  id        Int      @id @default(autoincrement())
+  name      String   @unique
+  contact   String?
+  email     String?
+  address   String?
+  products  Product[]
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Sale {
+  id            Int      @id @default(autoincrement())
+  total         Float
+  discount      Float    @default(0)
+  paymentMethod String   @default("Cash")
+  createdAt     DateTime @default(now())
+  items         SaleItem[]
+}
+
+model SaleItem {
+  id        Int      @id @default(autoincrement())
+  saleId    Int
+  sale      Sale     @relation(fields: [saleId], references: [id])
+  productId Int
+  product   Product  @relation(fields: [productId], references: [id])
+  quantity  Int
+  price     Float
+}
+
+model Settings {
+  id              Int      @id @default(autoincrement())
+  key             String   @unique
+  value           String
+  updatedAt       DateTime @updatedAt
+}
+
+// ==================== STOREFRONT CONTENT MANAGEMENT ====================
+
+// Hero Sliders/Banners for the homepage
+model Slider {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String?
+  buttonText  String?
+  buttonLink  String?
+  imageUrl    String
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Promotional Banners (smaller banners on the side)
+model PromoBanner {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String?
+  buttonText  String?
+  buttonLink  String?
+  imageUrl    String
+  position    String   @default("sidebar") // sidebar, bottom, middle
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Deals of the Day
+model Deal {
+  id          Int      @id @default(autoincrement())
+  productId   Int
+  product     Product  @relation(fields: [productId], references: [id])
+  discount    Float    // percentage discount
+  startDate   DateTime
+  endDate     DateTime
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Featured Sections (customizable product sections)
+model FeaturedSection {
+  id          Int      @id @default(autoincrement())
+  title       String
+  subtitle    String?
+  type        String   @default("products") // products, categories, brands
+  layout      String   @default("grid") // grid, carousel, list
+  itemIds     String   // comma-separated IDs of products/categories
+  bgColor     String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Brand Partners/Logos
+model Brand {
+  id          Int      @id @default(autoincrement())
+  name        String
+  logoUrl     String
+  link        String?
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+// Store Information
+model StoreInfo {
+  id          Int      @id @default(autoincrement())
+  key         String   @unique // phone, email, address, about, etc.
+  value       String
+  updatedAt   DateTime @updatedAt
+}
+
+// Homepage Features (Free Delivery, Secure Payment, etc.)
+model Feature {
+  id          Int      @id @default(autoincrement())
+  title       String
+  description String
+  icon        String   // icon name or URL
+  isActive    Boolean  @default(true)
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
