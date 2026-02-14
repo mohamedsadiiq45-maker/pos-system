@@ -7,7 +7,12 @@ import {
   CardContent,
   Chip,
   Container,
+  Divider,
   Grid,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
   Stack,
   Toolbar,
   Typography,
@@ -18,49 +23,57 @@ import SchoolIcon from '@mui/icons-material/School';
 import WaterDropIcon from '@mui/icons-material/WaterDrop';
 import GroupsIcon from '@mui/icons-material/Groups';
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import TaskAltIcon from '@mui/icons-material/TaskAlt';
+import HandshakeIcon from '@mui/icons-material/Handshake';
+import PublicIcon from '@mui/icons-material/Public';
 
 const services = [
   {
     title: 'Emergency Food Support',
-    description: 'We provide food packages and cooked meals to families facing hunger and crisis.',
+    description: 'Weekly food packages, nutrition support, and emergency meal distributions for families in crisis.',
     icon: <VolunteerActivismIcon sx={{ fontSize: 34, color: 'primary.main' }} />,
   },
   {
     title: 'Healthcare Outreach',
-    description: 'Free health screening, medicine support, and referrals for poor and vulnerable communities.',
+    description: 'Mobile health screening, medicine support, maternal care referrals, and awareness campaigns.',
     icon: <HealthAndSafetyIcon sx={{ fontSize: 34, color: 'primary.main' }} />,
   },
   {
     title: 'Education Assistance',
-    description: 'School materials, scholarships, and mentorship programs for children and youth.',
+    description: 'School supplies, tuition aid, learning clubs, and mentorship for children and vulnerable youth.',
     icon: <SchoolIcon sx={{ fontSize: 34, color: 'primary.main' }} />,
   },
   {
     title: 'Clean Water Initiatives',
-    description: 'Building access to clean and safe water through wells, filters, and hygiene campaigns.',
+    description: 'Safe water points, household filters, sanitation support, and hygiene training for communities.',
     icon: <WaterDropIcon sx={{ fontSize: 34, color: 'primary.main' }} />,
   },
 ];
 
 const impactStats = [
   { label: 'Families Supported', value: '3,500+' },
-  { label: 'Children in School Programs', value: '1,200+' },
+  { label: 'Children Supported in Education', value: '1,200+' },
   { label: 'Community Volunteers', value: '260+' },
-  { label: 'Clean Water Projects', value: '48' },
+  { label: 'Water & Sanitation Projects', value: '48' },
 ];
 
 const HomePage: React.FC = () => {
   return (
     <Box sx={{ backgroundColor: 'background.default' }}>
       <AppBar position="sticky" color="inherit" elevation={0} sx={{ borderBottom: '1px solid #e2e8f0' }}>
-        <Toolbar sx={{ justifyContent: 'space-between' }}>
+        <Toolbar sx={{ justifyContent: 'space-between', gap: 2, flexWrap: 'wrap', py: 1 }}>
           <Stack direction="row" spacing={1.5} alignItems="center">
             <FavoriteIcon color="primary" />
             <Typography variant="h6" fontWeight={800} color="primary.main">
               Alwacyi Foundation
             </Typography>
           </Stack>
-          <Button variant="contained" color="primary">Donate Now</Button>
+          <Stack direction="row" spacing={1.5} alignItems="center">
+            <Button color="inherit" href="#services">Services</Button>
+            <Button color="inherit" href="#impact">Impact</Button>
+            <Button color="inherit" href="#about">About</Button>
+            <Button variant="contained" color="primary">Donate Now</Button>
+          </Stack>
         </Toolbar>
       </AppBar>
 
@@ -72,13 +85,13 @@ const HomePage: React.FC = () => {
         }}
       >
         <Container maxWidth="lg">
-          <Chip label="Serving with compassion" sx={{ mb: 2, bgcolor: 'rgba(255,255,255,0.2)', color: 'white' }} />
-          <Typography variant="h2" fontWeight={800} sx={{ fontSize: { xs: '2rem', md: '3.5rem' }, maxWidth: 800 }}>
-            Helping poor people live with dignity, hope, and opportunity.
+          <Chip label="Nonprofit • Community First" sx={{ mb: 2, bgcolor: 'rgba(255,255,255,0.2)', color: 'white' }} />
+          <Typography variant="h2" fontWeight={800} sx={{ fontSize: { xs: '2rem', md: '3.5rem' }, maxWidth: 850 }}>
+            Ending poverty with practical support, dignity, and long-term opportunity.
           </Typography>
-          <Typography sx={{ mt: 3, maxWidth: 720, fontSize: { xs: '1rem', md: '1.15rem' } }}>
-            Alwacyi Foundation is a humanitarian organization committed to reducing poverty through food relief,
-            healthcare support, education, and community empowerment.
+          <Typography sx={{ mt: 3, maxWidth: 760, fontSize: { xs: '1rem', md: '1.15rem' } }}>
+            Alwacyi Foundation is a humanitarian organization helping poor people through food relief, healthcare,
+            education, and clean water programs that strengthen families and communities.
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ mt: 4 }}>
             <Button variant="contained" color="secondary" size="large">Become a Partner</Button>
@@ -93,12 +106,12 @@ const HomePage: React.FC = () => {
         </Container>
       </Box>
 
-      <Container maxWidth="lg" sx={{ py: { xs: 6, md: 9 } }}>
+      <Container id="services" maxWidth="lg" sx={{ py: { xs: 6, md: 9 } }}>
         <Typography variant="h4" fontWeight={800} textAlign="center" sx={{ mb: 1 }}>
-          Our Services
+          Core Services
         </Typography>
         <Typography color="text.secondary" textAlign="center" sx={{ mb: 5 }}>
-          We focus on practical support for families and communities in need.
+          Focused, measurable programs designed to meet urgent needs and build resilience.
         </Typography>
 
         <Grid container spacing={3}>
@@ -118,7 +131,7 @@ const HomePage: React.FC = () => {
         </Grid>
       </Container>
 
-      <Box sx={{ py: { xs: 6, md: 8 }, bgcolor: '#ecfdf5' }}>
+      <Box id="impact" sx={{ py: { xs: 6, md: 8 }, bgcolor: '#ecfdf5' }}>
         <Container maxWidth="lg">
           <Stack direction="row" spacing={1.5} alignItems="center" justifyContent="center" sx={{ mb: 3 }}>
             <GroupsIcon color="primary" />
@@ -143,14 +156,65 @@ const HomePage: React.FC = () => {
         </Container>
       </Box>
 
-      <Box sx={{ py: 8 }}>
+      <Container id="about" maxWidth="lg" sx={{ py: { xs: 6, md: 9 } }}>
+        <Grid container spacing={4} alignItems="stretch">
+          <Grid item xs={12} md={6}>
+            <Card sx={{ borderRadius: 3, height: '100%' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2 }}>
+                  <PublicIcon color="primary" />
+                  <Typography variant="h5" fontWeight={800}>Our Vision</Typography>
+                </Stack>
+                <Typography color="text.secondary" sx={{ mb: 2 }}>
+                  A society where every family has access to food, healthcare, education, and safe living conditions.
+                </Typography>
+                <Divider sx={{ my: 2 }} />
+                <List dense>
+                  <ListItem disableGutters>
+                    <ListItemIcon><TaskAltIcon color="primary" /></ListItemIcon>
+                    <ListItemText primary="Transparent use of donations and resources" />
+                  </ListItem>
+                  <ListItem disableGutters>
+                    <ListItemIcon><TaskAltIcon color="primary" /></ListItemIcon>
+                    <ListItemText primary="Programs driven by local community needs" />
+                  </ListItem>
+                  <ListItem disableGutters>
+                    <ListItemIcon><TaskAltIcon color="primary" /></ListItemIcon>
+                    <ListItemText primary="Partnership model with volunteers and institutions" />
+                  </ListItem>
+                </List>
+              </CardContent>
+            </Card>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Card sx={{ borderRadius: 3, bgcolor: '#0f172a', color: 'white', height: '100%' }}>
+              <CardContent sx={{ p: 4 }}>
+                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 2 }}>
+                  <HandshakeIcon sx={{ color: '#fde68a' }} />
+                  <Typography variant="h5" fontWeight={800}>How You Can Help</Typography>
+                </Stack>
+                <Typography sx={{ color: '#cbd5e1', mb: 3 }}>
+                  Your support directly funds life-changing assistance for poor communities.
+                </Typography>
+                <Stack spacing={1.5}>
+                  <Button variant="contained" color="secondary">Donate Monthly</Button>
+                  <Button variant="outlined" sx={{ borderColor: '#94a3b8', color: '#f8fafc' }}>Sponsor a Child</Button>
+                  <Button variant="outlined" sx={{ borderColor: '#94a3b8', color: '#f8fafc' }}>Join as Volunteer</Button>
+                </Stack>
+              </CardContent>
+            </Card>
+          </Grid>
+        </Grid>
+      </Container>
+
+      <Box sx={{ py: 8, borderTop: '1px solid #e2e8f0' }}>
         <Container maxWidth="md" sx={{ textAlign: 'center' }}>
           <Typography variant="h4" fontWeight={800} sx={{ mb: 2 }}>
             Join Alwacyi Foundation in Changing Lives
           </Typography>
           <Typography color="text.secondary" sx={{ mb: 3 }}>
-            Whether through donations, partnerships, or volunteering, your support helps us reach more people in
-            poverty and build stronger communities.
+            Through donations, partnerships, and volunteering, you help us reach more families and build stronger,
+            healthier communities.
           </Typography>
           <Button variant="contained" size="large" color="primary">
             Contact the Foundation
