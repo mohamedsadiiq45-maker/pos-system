@@ -6,16 +6,16 @@ const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#166534',
-      dark: '#14532d',
-      light: '#22c55e',
+      main: '#1f5c89',
+      dark: '#18496d',
+      light: '#61a9d5',
     },
     secondary: {
-      main: '#f59e0b',
-      dark: '#d97706',
+      main: '#79c51f',
+      dark: '#5fa015',
     },
     background: {
-      default: '#f8fafc',
+      default: '#f4f7fb',
       paper: '#ffffff',
     },
     text: {
@@ -25,11 +25,12 @@ const theme = createTheme({
   },
   typography: {
     fontFamily: 'Outfit, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
-    h2: { lineHeight: 1.15 },
-    h4: { lineHeight: 1.2 },
+    h1: { fontWeight: 800 },
+    h2: { fontWeight: 800, lineHeight: 1.15 },
+    h4: { fontWeight: 800, lineHeight: 1.2 },
   },
   shape: {
-    borderRadius: 12,
+    borderRadius: 14,
   },
   components: {
     MuiButton: {
@@ -37,20 +38,19 @@ const theme = createTheme({
         root: {
           textTransform: 'none',
           fontWeight: 700,
-          borderRadius: 10,
+          borderRadius: 12,
+          paddingInline: 18,
         },
       },
     },
   },
 });
 
-const App: React.FC = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <HomePage />
-    </ThemeProvider>
-  );
-};
+const App: React.FC = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <HomePage />
+  </ThemeProvider>
+);
 
 export default App;
