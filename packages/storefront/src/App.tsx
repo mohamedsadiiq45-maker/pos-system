@@ -1,89 +1,56 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
-import { ThemeProvider, createTheme, CssBaseline } from '@mui/material';
-import { Box } from '@mui/material';
-import { CartProvider } from './context/CartContext';
-import { SettingsProvider } from './context/SettingsContext';
-import Header from './components/Header';
-import Footer from './components/Footer';
+import { CssBaseline, ThemeProvider, createTheme } from '@mui/material';
 import HomePage from './pages/HomePage';
-import ProductsPage from './pages/ProductsPage';
-import ProductDetailPage from './pages/ProductDetailPage';
-import CartPage from './pages/CartPage';
-import CategoriesPage from './pages/CategoriesPage';
-import CategoryPage from './pages/CategoryPage';
 
 const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#2563eb',
-      dark: '#1d4ed8',
-      light: '#3b82f6',
+      main: '#1f5c89',
+      dark: '#18496d',
+      light: '#61a9d5',
     },
     secondary: {
-      main: '#10b981',
+      main: '#79c51f',
+      dark: '#5fa015',
     },
     background: {
-      default: '#f8fafc',
+      default: '#f4f7fb',
       paper: '#ffffff',
     },
     text: {
       primary: '#0f172a',
-      secondary: '#64748b',
+      secondary: '#475569',
     },
   },
   typography: {
     fontFamily: 'Outfit, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif',
+    h1: { fontWeight: 800 },
+    h2: { fontWeight: 800, lineHeight: 1.15 },
+    h4: { fontWeight: 800, lineHeight: 1.2 },
   },
   shape: {
-    borderRadius: 8,
+    borderRadius: 14,
   },
   components: {
     MuiButton: {
       styleOverrides: {
         root: {
           textTransform: 'none',
-          fontWeight: 600,
-        },
-      },
-    },
-    MuiCssBaseline: {
-      styleOverrides: {
-        body: {
-          backgroundColor: '#f8fafc',
+          fontWeight: 700,
+          borderRadius: 12,
+          paddingInline: 18,
         },
       },
     },
   },
 });
 
-const App: React.FC = () => {
-  return (
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <BrowserRouter>
-        <SettingsProvider>
-          <CartProvider>
-            <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
-              <Header />
-              <Box component="main" sx={{ flex: 1 }}>
-                <Routes>
-                  <Route path="/" element={<HomePage />} />
-                  <Route path="/products" element={<ProductsPage />} />
-                  <Route path="/product/:id" element={<ProductDetailPage />} />
-                  <Route path="/cart" element={<CartPage />} />
-                  <Route path="/categories" element={<CategoriesPage />} />
-                  <Route path="/category/:id" element={<CategoryPage />} />
-                </Routes>
-              </Box>
-              <Footer />
-            </Box>
-          </CartProvider>
-        </SettingsProvider>
-      </BrowserRouter>
-    </ThemeProvider>
-  );
-};
+const App: React.FC = () => (
+  <ThemeProvider theme={theme}>
+    <CssBaseline />
+    <HomePage />
+  </ThemeProvider>
+);
 
 export default App;
